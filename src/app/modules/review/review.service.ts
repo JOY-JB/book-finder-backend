@@ -1,3 +1,5 @@
+import httpStatus from "http-status";
+import ApiError from "../../../errors/ApiError";
 import { IReview } from "./review.interface";
 import { Review } from "./review.model";
 
@@ -13,6 +15,12 @@ const createReview = async (
 };
 
 const deleteReview = async (reviewId: string): Promise<void> => {
+  const isExist = await Review.findById(reviewId);
+
+  if (!isExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, "review not found");
+  }
+
   await Review.deleteOne({ _id: reviewId });
 };
 

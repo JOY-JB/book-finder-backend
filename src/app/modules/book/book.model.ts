@@ -12,6 +12,9 @@ const bookSchema = new Schema<IBook>(
     timestamps: true,
     toJSON: {
       virtuals: true,
+      transform: function (doc, ret) {
+        ret.publicationDate = ret.publicationDate.toISOString().split("T")[0];
+      },
     },
   }
 );
