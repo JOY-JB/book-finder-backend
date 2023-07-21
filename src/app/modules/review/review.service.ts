@@ -5,10 +5,10 @@ import { Review } from "./review.model";
 
 const createReview = async (
   bookId: string,
-  userId: string,
+  userEmail: string,
   comment: string
 ): Promise<IReview> => {
-  const review = new Review({ bookId, userId, comment });
+  const review = new Review({ bookId, userEmail, comment });
 
   const newReview = await review.save();
   return newReview;

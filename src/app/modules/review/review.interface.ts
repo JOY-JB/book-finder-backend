@@ -2,7 +2,7 @@ import { Model, Schema } from "mongoose";
 
 export interface IReview {
   bookId: Schema.Types.ObjectId;
-  userId: Schema.Types.ObjectId;
+  userEmail: string;
   comment: string;
 }
 

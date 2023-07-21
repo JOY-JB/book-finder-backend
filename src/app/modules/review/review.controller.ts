@@ -7,9 +7,9 @@ import { ReviewService } from "./review.service";
 
 const createBookReview = catchAsync(async (req: Request, res: Response) => {
   const bookId = req.params.id;
-  const { userId, comment } = req.body;
+  const { userEmail, comment } = req.body;
 
-  const review = await ReviewService.createReview(bookId, userId, comment);
+  const review = await ReviewService.createReview(bookId, userEmail, comment);
 
   sendResponse<IReview>(res, {
     statusCode: httpStatus.OK,
