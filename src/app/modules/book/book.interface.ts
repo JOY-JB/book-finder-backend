@@ -5,6 +5,7 @@ export interface IBook {
   author: string;
   genre: string;
   publicationDate: Date;
+  userEmail: string;
 }
 
 export type BookModel = Model<IBook, Record<string, unknown>>;

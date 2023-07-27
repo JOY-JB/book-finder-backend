@@ -7,6 +7,7 @@ const bookSchema = new Schema<IBook>(
     author: { type: String, required: true },
     genre: { type: String, required: true },
     publicationDate: { type: Date, required: true },
+    userEmail: { type: String, required: true },
   },
   {
     timestamps: true,
