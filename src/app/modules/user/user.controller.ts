@@ -17,9 +17,9 @@ const getAllUsers = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getSingleUser = catchAsync(async (req: Request, res: Response) => {
-  const { id } = req.params;
+  const { email } = req.params;
 
-  const result = await UserService.getSingleUser(id);
+  const result = await UserService.getSingleUser(email);
 
   sendResponse<IUser>(res, {
     statusCode: httpStatus.OK,
@@ -44,8 +44,42 @@ const createUser: RequestHandler = catchAsync(
   }
 );
 
+const addBookToWishList: RequestHandler = catchAsync(
+  async (req: Request, res: Response) => {
+    const { bookId } = req.params;
+    const { userEmail } = req.body;
+
+    const result = await UserService.addBookToWishList(userEmail, bookId);
+
+    sendResponse<string[]>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Book added to WishList successfully!",
+      data: result,
+    });
+  }
+);
+
+const removeBookFromWishList: RequestHandler = catchAsync(
+  async (req: Request, res: Response) => {
+    const { bookId } = req.params;
+    const { userEmail } = req.body;
+
+    await UserService.removeBookFromWishList(userEmail, bookId);
+
+    sendResponse<null>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Book removed from WishList successfully!",
+      data: null,
+    });
+  }
+);
+
 export const UserController = {
   createUser,
   getAllUsers,
   getSingleUser,
+  addBookToWishList,
+  removeBookFromWishList,
 };
